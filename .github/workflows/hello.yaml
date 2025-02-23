@@ -1,10 +1,16 @@
 # Define your Workflow name here
 name: Hello World Workflow
 
+# on is a triggering event that when to run the workflow, Here on.push is the signal whenver there is a push to the repo on main branch run this workflow.
 on:
   push: 
     branches:
       - main
+  # similiarly whenver there is a pull request happens on the repo it should run the workflow, this is useful whenver we are reviewing the code and merge the code.
+  # Ex -
+  # pull_request:
+  #     branches:
+  #         - main
 
 # Create a new Job (Set of steps that will run on env)
 jobs:
@@ -14,9 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     # Steps (set of commands that will run)
     steps:
+        # There can be multiple steps
       - name: Checkout Code
+        # Actions are the custome pre-defined tools which we can use. Here "use: actions/checkout@v4" pulls our code into the VM so we can work with it.
         uses: actions/checkout@v4
         # Name of first step 
       - name: hello-world
         # Run this command
-        run: echo "Hello World"
+        run: echo "Hello World" 
+  # Now there can be Multiple Jobs running parallel or sequentially
+  # Here is the Job which will run in parallel
+  list-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: list files
+        run: ls -la
