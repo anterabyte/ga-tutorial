@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     # Steps (set of commands that will run)
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
         # Name of first step 
       - name: hello-world
         # Run this command
