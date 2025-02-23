@@ -6,7 +6,7 @@ on:
   push: 
     branches:
       - main
-  # similiarly whenver there is a pull request happens on the repo it should run the workflow, this is useful whenver we are reviewing the code and merge the code.
+  # similiarly whenver there is a pull request happens on the repo it should run the workflow, this is useful to review the changes before merging.
   # Ex -
   # pull_request:
   #     branches:
@@ -37,3 +37,33 @@ jobs:
         uses: actions/checkout@v4
       - name: list files
         run: ls -la
+  # Another Job to run
+  env-test:
+    runs-on: ubuntu-latest
+    # We can set env variables which can be send to the steps to execute
+    env:
+      MY_NAME: "Alex"
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Use env variable
+        # Here GITHUB_SHA  is the built in variable for commit hash
+        run: echo "Hi my name is $MY_NAME! commit- $GITHUB_SHA"
+  # Test js/typescript applications
+  # node-js-test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        # actions/setup-node@v4 will setup nodejs for the code review
+      - name: Setup Nodejs
+        uses: actions/setup-node@v4
+        # with helps woth setup the which node version to use
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: run test
+        run: npm test
+        
