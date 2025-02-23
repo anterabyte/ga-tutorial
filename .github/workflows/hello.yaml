@@ -1,0 +1,20 @@
+# Define your Workflow name here
+name: Hello World Workflow
+
+on:
+  push: 
+    branches:
+      - main
+
+# Create a new Job (Set of steps that will run on env)
+jobs:
+  # Name of Job
+  say-hello:
+    # Intiate a environment in which our steps will run
+    runs-on: ubuntu-latest
+    # Steps (set of commands that will run)
+    steps:
+        # Name of first step 
+      - name: hello-world
+        # Run this command
+        run: echo "Hello World"
