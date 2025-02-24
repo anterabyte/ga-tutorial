@@ -1,0 +1,16 @@
+name: Conditional-flow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  conditional-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Deploy (Only On Main)
+        if: github.ref == 'ref/heads/main'
+        run: echo "Deploying on github" 
